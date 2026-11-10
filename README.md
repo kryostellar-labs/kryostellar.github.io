@@ -15,7 +15,6 @@ The template provides modular, reusable GitHub Actions workflows that can be cal
 - **`__call__build.yaml`** - Build workflow submodule for compiling and building projects
 - **`__call__checks.yaml`** - Testing and validation workflow submodule
 - **`__call__publish.yaml`** - Publishing workflow submodule for artifact distribution
-- **`__call__release.yaml`** - Release workflow submodule for version management
 
 ### 🤖 Automation
 
@@ -37,11 +36,9 @@ The template provides modular, reusable GitHub Actions workflows that can be cal
 │   │   ├── __call__build.yaml      # Reusable build workflow
 │   │   ├── __call__checks.yaml     # Reusable checks workflow
 │   │   ├── __call__publish.yaml    # Reusable publish workflow
-│   │   ├── __call__release.yaml    # Reusable release workflow
 │   │   ├── auto-merge.yaml         # Auto-merge Dependabot PRs
 │   │   ├── pull-request-check.yaml # PR validation workflow
-│   │   ├── publish.yaml            # Publish workflow
-│   │   └── release.yaml            # Release workflow
+│   │   └── publish.yaml            # Publish workflow
 │   ├── CODEOWNERS                  # Code ownership configuration
 │   ├── dependabot.yaml            # Dependabot configuration
 │   └── merge-instructions.md       # Template merging guidelines
