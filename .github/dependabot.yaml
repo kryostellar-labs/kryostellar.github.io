@@ -1,5 +1,39 @@
 version: 2
 updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    groups:
+      angular-minor:
+        applies-to: version-updates
+        patterns:
+          - "@angular*"
+        update-types:
+          - "minor"
+          - "patch"
+      angular-major:
+        applies-to: version-updates
+        patterns:
+          - "@angular*"
+        update-types:
+          - "major"
+      msal:
+        applies-to: version-updates
+        patterns:
+          - "@azure/msal-*"
+        update-types:
+          - "minor"
+          - "patch"
+      vitest:
+        applies-to: version-updates
+        patterns:
+          - "vitest*"
+          - "@vitest*"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

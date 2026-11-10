@@ -1,23 +1,85 @@
-# DevOps Template
+# Angular Webapp Template
 
-A project skeleton repository focusing on DevOps template elements implemented in GitHub Workflows. This repository provides reusable workflows and automation tools for DevOps practices, including standardized CI/CD workflows, automated dependency management, and pull request automation.
+This project uses [Angular CLI](https://github.com/angular/angular-cli) version 22.
 
-## Overview
+## Prerequisites
 
-This repository serves as a project skeleton containing DevOps template elements implemented as GitHub Actions workflows. It is designed to be reused as a base for new projects **while preserving git history**, allowing template updates to be merged and adopted later. The repository includes reusable GitHub Actions workflows, automated dependency updates via Dependabot, and automated merge workflows for dependency updates.
+- Node.js 24
+- npm
 
-## Features
+Install dependencies with:
 
-### 🔄 Reusable Workflows
+```shell
+npm install
+```
 
-The template provides modular, reusable GitHub Actions workflows that can be called from your project workflows:
+## Development server
 
-- **`__call__build.yaml`** - Build workflow submodule for compiling and building projects
-- **`__call__checks.yaml`** - Testing and validation workflow submodule
-- **`__call__publish.yaml`** - Publishing workflow submodule for artifact distribution
-- **`__call__release.yaml`** - Release workflow submodule for version management
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-### 🤖 Automation
+## Code scaffolding
+
+Run `npm run ng -- generate component component-name` to generate a new component. You can also use `npm run ng -- generate directive|pipe|service|class|guard|interface|enum`.
+
+## Build
+
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `npm test` to execute the unit tests via [Vitest](https://vitest.dev) (`@angular/build:unit-test`). Tests run with watch mode disabled and code coverage enabled.
+
+## Linting
+
+Run `npm run lint` to execute the Angular lint check.
+
+## Pull request checks
+
+Pull request checks use Node.js 24 and run the commands defined in `.github/workflows/__call__checks.yaml`:
+
+```shell
+npm clean-install
+npm install
+npm run lint
+npm run build
+npm test
+```
+
+Run these checks locally before opening or updating a pull request.
+
+## Further help
+
+To get more help on the Angular CLI, run `npm run ng -- help` or see the [Angular CLI documentation](https://angular.dev/tools/cli).
+
+## Run this project locally
+
+To create container image, use the following command.
+
+```shell
+docker build -t angular-webapp-template .
+```
+
+To start the container, use the following command.
+
+```shell
+docker run -d -p 8000:80 --name angular-webapp-template angular-webapp-template
+```
+
+Alternatively you can use docker-compose as well.
+
+```shell
+docker-compose up -d
+```
+
+When you are done with local development inspection, you can stop the container.
+
+```shell
+docker-compose down
+```
+
+## DevOps Template Features
+
+This repository includes DevOps template elements implemented as GitHub Actions workflows. The template provides reusable workflows and automation tools for DevOps practices, including standardized CI/CD workflows, automated dependency management, and pull request automation.
 
 - **Auto-merge Dependabot PRs** - Automatically merges Dependabot pull requests when all checks pass
   - Intelligent mergeable status checking with retry logic
@@ -27,69 +89,6 @@ The template provides modular, reusable GitHub Actions workflows that can be cal
 - **Pull Request Checks** - Automated validation workflow that runs on pull requests to main branch
 
 - **Dependabot Configuration** - Automated dependency updates for GitHub Actions
-
-## Repository Structure
-
-```
-.
-├── .github/
-│   ├── workflows/
-│   │   ├── __call__build.yaml      # Reusable build workflow
-│   │   ├── __call__checks.yaml     # Reusable checks workflow
-│   │   ├── __call__publish.yaml    # Reusable publish workflow
-│   │   ├── __call__release.yaml    # Reusable release workflow
-│   │   ├── auto-merge.yaml         # Auto-merge Dependabot PRs
-│   │   ├── pull-request-check.yaml # PR validation workflow
-│   │   ├── publish.yaml            # Publish workflow
-│   │   └── release.yaml            # Release workflow
-│   ├── CODEOWNERS                  # Code ownership configuration
-│   ├── dependabot.yaml            # Dependabot configuration
-│   └── merge-instructions.md       # Template merging guidelines
-├── CONTRIBUTING.md                 # Contribution guidelines
-└── README.md                       # This file
-```
-
-## Usage
-
-### Using This Template
-
-**Important**: This repository is designed to be reused **while keeping git history**. This allows template updates to be merged and adopted later, maintaining a connection to the original template repository.
-
-1. **Clone the Repository**: Clone this repository to preserve the complete git history:
-   ```bash
-   git clone <template-repository-url> <your-project-name>
-   cd <your-project-name>
-   ```
-
-2. **Set Up Your Remote**: Change the remote origin to point to your new repository:
-   ```bash
-   git remote set-url origin <your-new-repository-url>
-   ```
-
-3. **Add Template Remote**: Add the template repository as a remote source to enable merging updates:
-   ```bash
-   git remote add template <template-repository-url>
-   git fetch template
-   ```
-
-4. **Merge Template Updates**: When you want to adopt the latest template changes, follow the [Template Merging Process](.github/merge-instructions.md) to merge updates from the template remote while preserving your project-specific changes.
-
-5. **Customize Workflows**: Adapt the reusable workflows (`__call__*.yaml`) to match your project's specific build, test, and deployment requirements while maintaining compatibility with template updates.
-
-**Note**: Cloning preserves the complete git history, enabling you to merge template updates later. Avoid using GitHub's "Use this template" button, as it creates a new repository without preserving commit history.
-
-### Workflow Integration
-
-To use the reusable workflows in your project, reference them in your workflow files:
-
-```yaml
-jobs:
-  build:
-    uses: ./.github/workflows/__call__build.yaml
-  
-  checks:
-    uses: ./.github/workflows/__call__checks.yaml
-```
 
 ## Auto-Merge Workflow
 
@@ -116,7 +115,12 @@ This repository is designed to maintain git history, allowing template updates t
    - Keep your project-specific dependencies but adopt version numbers from the template
    - Preserve your project-specific customizations
    - Ask for help when unsure about conflict resolution
-6. Run checks locally using `./.github/workflows/__call__checks.yaml`
+6. Run the pull request checks locally with Node.js 24:
+   - `npm clean-install`
+   - `npm install`
+   - `npm run lint`
+   - `npm run build`
+   - `npm test`
 7. Push the feature branch and open a pull request
 8. After merge, switch back to main and clean up the feature branch
 
@@ -127,7 +131,7 @@ See [merge-instructions.md](.github/merge-instructions.md) for detailed steps.
 ## Dependabot
 
 Dependabot is configured to:
-- Check for GitHub Actions updates daily
+- Check for npm and GitHub Actions updates daily
 - Automatically create pull requests for updates
 - Auto-merge PRs when checks pass (via auto-merge workflow)
 
