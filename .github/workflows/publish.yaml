@@ -2,6 +2,9 @@ name: 'Publish'
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   test:
@@ -17,3 +20,6 @@ jobs:
     name: 'Publish'
     needs: [build]
     uses: ./.github/workflows/__call__publish.yaml
+    permissions:
+      id-token: write
+      pages: write
