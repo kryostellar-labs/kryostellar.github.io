@@ -1,10 +1,12 @@
 # Contributing
 
-Thank you for your interest in contributing to the Angular Webapp Template! This is an Angular web application template that includes DevOps workflow elements implemented in GitHub Actions.
+Thank you for your interest in contributing to Kryostellar Docs! This repository powers the public documentation site for [kryostellar.com](https://kryostellar.com) at [docs.kryostellar.com](https://docs.kryostellar.com).
+
+Content and features here are meant for public consumption. Do not add authentication, private APIs, or other gated access unless that decision is explicitly revisited for the project.
 
 ## How to Contribute
 
-To contribute improvements to this template, follow the traditional fork-based workflow:
+To contribute improvements, follow the traditional fork-based workflow:
 
 1. **Fork the repository on GitHub**
    - Navigate to the repository on GitHub
@@ -13,13 +15,13 @@ To contribute improvements to this template, follow the traditional fork-based w
 
 2. **Clone your fork locally**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/angular-webapp-template.git
-   cd angular-webapp-template
+   git clone https://github.com/YOUR_USERNAME/kryostellar.github.io.git
+   cd kryostellar.github.io
    ```
 
 3. **Add the original repository as upstream**
    ```bash
-   git remote add upstream https://github.com/kryostellar-labs/angular-webapp-template.git
+   git remote add upstream https://github.com/kryostellar-labs/kryostellar.github.io.git
    ```
 
 4. **Create a feature branch**
@@ -29,7 +31,7 @@ To contribute improvements to this template, follow the traditional fork-based w
 
 5. **Make your changes**
    - Follow the existing code style and patterns
-   - Ensure your changes align with the project's purpose
+   - Ensure your changes align with hosting public Kryostellar documentation
    - Update documentation if needed
    - Use Node.js 24 when installing dependencies or running checks
    - Do not use `--legacy-peer-deps`; resolve peer dependency conflicts by aligning package versions
@@ -99,14 +101,9 @@ This project includes automated pull request checks that run on every pull reque
 - Address any failing checks
 - Ensure all automated tests pass
 
-## Git History Preservation
+## Template Updates
 
-**Important**: When using this repository as a base for your project, maintain the git history by **cloning** the repository rather than using GitHub's "Use this template" feature or creating a fresh repository.
-
-Cloning preserves all commit history, enabling continuous adoption of template updates through git merge operations. This allows you to:
-- Merge template improvements into your project
-- Maintain a connection to the original template repository
-- Track the evolution of your project alongside template updates
+This site is derived from `template-angular`. When merging template changes, preserve public-docs customizations (no MSAL authentication) and keep documentation focused on kryostellar.com.
 
 ## Code of Conduct
 

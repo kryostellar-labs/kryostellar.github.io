@@ -1,0 +1,102 @@
+---
+description: Kryostellar visual design — dark space theme, glassmorphism, motion, wordmark, and brand hierarchy
+globs: src/**/*.{scss,css,html,ts}
+alwaysApply: false
+---
+
+# Kryostellar Design Guidelines
+
+Follow these principles on every Kryostellar web surface. Reference implementations: docs landing pane (`src/app/components/landing-page/`), main-site login (`web-app/src/app/components/login-page/` on kryostellar.com), and tokens in `src/styles.scss`.
+
+## Brand & composition
+
+- **Brand first:** `Kryostellar` is the hero signal. Prefer one strong headline; do not stack brand + domain as two competing titles.
+- **One job per viewport:** Login/hero surfaces stay sparse — brand, primary chrome (nav/CTA), and one dominant visual (planet/orbits). No cards, stat strips, or promo chips in the hero.
+- **Full-bleed atmosphere:** Pages sit on the dark space field (`--sf-bg` / `--sf-hero-gradient`), not flat white/gray panels.
+
+## Wordmark lockup (required for brand moments)
+
+The official written mark is a **two-tone split** of the single word `Kryostellar`. Use this anywhere the brand name is the hero signal (landing heroes, pane titles, splash/branding frames). Keep it consistent across docs, marketing, and product UI.
+
+| Part | Spelling | Color token | Value |
+| --- | --- | --- | --- |
+| Lead | `Kryo` | `--sf-brand-main` | `#ffffff` |
+| Tail | `stellar` | `--sf-brand-accent` | `#7eb6c9` (same as `--sf-accent`) |
+
+Rules:
+
+- **One word, two spans:** Render as adjacent spans with no space: `Kryo` + `stellar` → reads as **Kryostellar**.
+- **Do not reverse colors.** Lead is always white; tail is always the ice accent.
+- **Typography:** `--sf-font-display` (Sora), heavy weight for hero use (`800`), tight tracking (`~-0.04em`).
+- **Accessibility:** Keep both parts inside one heading/label so assistive tech still announces “Kryostellar”. Prefer decorative color only — never rely on the split alone for meaning.
+- **Where to use:** Hero brand, frosted pane titles, empty/coming-soon states, splash. Skip the two-tone split in dense chrome (tiny nav labels, footnotes) — use solid `--sf-text` there.
+- **Reuse:** Prefer the shared `.sf-wordmark` / `.sf-wordmark__main` / `.sf-wordmark__accent` classes from `src/styles.scss` instead of one-off colors.
+
+```html
+<!-- ✅ Official lockup -->
+<h1 class="sf-wordmark">
+  <span class="sf-wordmark__main">Kryo</span><span class="sf-wordmark__accent">stellar</span>
+</h1>
+```
+
+```html
+<!-- ❌ Avoid -->
+<span>Kryostellar</span>          <!-- flat single color in a brand-hero moment -->
+<span>stellar</span><span>Kryo</span>  <!-- reversed -->
+<span>Kryo </span><span>stellar</span> <!-- space breaks the word -->
+```
+
+## Tokens (use existing CSS variables)
+
+| Token | Role |
+| --- | --- |
+| `--sf-font-display` (Sora) | Headlines / brand |
+| `--sf-font-body` (Manrope) | Body / UI labels |
+| `--sf-bg` `#07090f` | Page ground |
+| `--sf-text` `#e8ecf4` | Body text |
+| `--sf-accent` `#7eb6c9` | Focus rings, cool accent |
+| `--sf-brand-main` `#ffffff` | Wordmark lead (`Kryo`) |
+| `--sf-brand-accent` `#7eb6c9` | Wordmark tail (`stellar`) |
+| `--sf-hero-gradient` | Ambient sky |
+| `--sf-ease` | Motion easing |
+
+Supporting palette: ice `#a8d4e0` / `#eef3f8`, deep `#0b1220` / `#2f6f82`. Prefer translucent layers over solid fills.
+
+## Glassmorphism (required for chrome)
+
+Frosted surfaces (nav, menus, overlays, interactive chips) must use **clear translucent layers**, not opaque cards:
+
+1. Semi-transparent base (`rgba(12, 18, 28, ~0.38)` + light top gradient)
+2. Soft rim border `rgba(238, 243, 248, ~0.18)`
+3. Inset highlight + soft outer shadow
+4. `backdrop-filter: blur(18px) saturate(1.35)` (+ `-webkit-` prefix)
+5. Optional sheen layer (radial ice highlight + diagonal light streak), `pointer-events: none`
+
+```scss
+// ✅ Glass chrome
+background:
+  linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.02)),
+  rgba(12, 18, 28, 0.38);
+border: 1px solid rgba(238, 243, 248, 0.18);
+backdrop-filter: blur(18px) saturate(1.35);
+```
+
+```scss
+// ❌ Opaque panel / Material card
+background: #fff;
+box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+```
+
+**Hover / focus:** Match the glass language — brighter translucent fill, stronger inset highlight, subtle ice border, `translateY(-1px)`. Focus-visible uses `--sf-accent` outline. Smooth transitions via `--sf-ease` (~0.25–0.35s).
+
+## Motion
+
+- Prefer calm loops (orbits, star twinkle, intentional brand pane motion) and short hover lifts — not noisy parallax stacks or glow pulses.
+- Honor `prefers-reduced-motion: reduce` (disable decorative animation / hover transforms).
+
+## Avoid
+
+- Purple/indigo AI defaults, warm cream + terracotta, broadsheet newspaper layouts
+- Heavy multi-layer drop shadows, neon glow as primary styling, emoji decoration
+- Dense dashboard chrome on marketing/login surfaces
+- Flat single-color `Kryostellar` in hero/brand lockups (use the two-tone wordmark)

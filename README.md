@@ -1,6 +1,10 @@
-# Angular Webapp Template
+# Kryostellar Docs
 
-This project uses [Angular CLI](https://github.com/angular/angular-cli) version 22.
+Public documentation site for [kryostellar.com](https://kryostellar.com), served at [docs.kryostellar.com](https://docs.kryostellar.com).
+
+This Angular app hosts publicly available product and platform documentation. There is no authentication; all published content is intended to be openly readable.
+
+This project is based on the [Angular webapp template](https://github.com/kryostellar-labs/template-angular) (Angular CLI 22) and keeps a `template` remote so upstream improvements can be merged over time.
 
 ## Prerequisites
 
@@ -53,33 +57,33 @@ To get more help on the Angular CLI, run `npm run ng -- help` or see the [Angula
 
 ## Run this project locally
 
-To create container image, use the following command.
+To create a container image:
 
 ```shell
-docker build -t angular-webapp-template .
+docker build -t docs-kryostellar-com .
 ```
 
-To start the container, use the following command.
+To start the container:
 
 ```shell
-docker run -d -p 8000:80 --name angular-webapp-template angular-webapp-template
+docker run -d -p 8000:80 --name docs-kryostellar-com docs-kryostellar-com
 ```
 
-Alternatively you can use docker-compose as well.
+Alternatively you can use docker-compose:
 
 ```shell
 docker-compose up -d
 ```
 
-When you are done with local development inspection, you can stop the container.
+When you are done with local development inspection, stop the container:
 
 ```shell
 docker-compose down
 ```
 
-## DevOps Template Features
+## DevOps Features
 
-This repository includes DevOps template elements implemented as GitHub Actions workflows. The template provides reusable workflows and automation tools for DevOps practices, including standardized CI/CD workflows, automated dependency management, and pull request automation.
+This repository includes DevOps automation from the template, implemented as GitHub Actions workflows:
 
 - **Auto-merge Dependabot PRs** - Automatically merges Dependabot pull requests when all checks pass
   - Intelligent mergeable status checking with retry logic
@@ -88,7 +92,7 @@ This repository includes DevOps template elements implemented as GitHub Actions 
 
 - **Pull Request Checks** - Automated validation workflow that runs on pull requests to main branch
 
-- **Dependabot Configuration** - Automated dependency updates for GitHub Actions
+- **Dependabot Configuration** - Automated dependency updates for npm and GitHub Actions
 
 ## Auto-Merge Workflow
 
@@ -105,15 +109,15 @@ The workflow includes:
 
 ## Template Merging Process
 
-This repository is designed to maintain git history, allowing template updates to be merged and adopted. When updating your repository with template changes:
+This repository maintains git history so template updates can be merged and adopted. When updating with template changes:
 
 1. Update your local main branch
 2. Fetch all remotes (including the template remote)
 3. Create a feature branch for the template update
 4. Merge changes from the template remote's main branch into your feature branch
 5. Resolve conflicts according to the guidelines:
-   - Keep your project-specific dependencies but adopt version numbers from the template
-   - Preserve your project-specific customizations
+   - Keep project-specific dependencies but adopt version numbers from the template
+   - Preserve project-specific customizations (including the absence of MSAL auth for this public docs site)
    - Ask for help when unsure about conflict resolution
 6. Run the pull request checks locally with Node.js 24:
    - `npm clean-install`
@@ -123,8 +127,6 @@ This repository is designed to maintain git history, allowing template updates t
    - `npm test`
 7. Push the feature branch and open a pull request
 8. After merge, switch back to main and clean up the feature branch
-
-This process ensures that template improvements can be continuously adopted while preserving your project's git history and customizations.
 
 See [merge-instructions.md](.github/merge-instructions.md) for detailed steps.
 
@@ -145,7 +147,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deta
 
 ## License
 
-This template is part of the Kryostellar Labs project.
+This project is part of Kryostellar Labs.
 
 ## Support
 
