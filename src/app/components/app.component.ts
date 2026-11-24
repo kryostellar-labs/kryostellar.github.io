@@ -1,8 +1,5 @@
-import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-import { InteractionStatus } from '@azure/msal-browser';
-import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -12,29 +9,5 @@ import { filter } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  private msalService = inject(MsalService);
-  private msalBroadcastService = inject(MsalBroadcastService);
-
-  // Use a signal for title
-  readonly title = signal('angular-webapp-template');
-
-  // Use a signal to track interaction status
-  readonly interactionStatus = signal<InteractionStatus | null>(null);
-
-  constructor() {
-    this.msalBroadcastService.inProgress$
-      .pipe(filter((status: InteractionStatus) => status === InteractionStatus.None))
-      .subscribe(() => {
-        this.checkAndSetActiveAccount();
-        this.interactionStatus.set(InteractionStatus.None);
-      });
-  }
-
-  checkAndSetActiveAccount() {
-    const activeAccount = this.msalService.instance.getActiveAccount();
-    if (!activeAccount && this.msalService.instance.getAllAccounts().length > 0) {
-      const accounts = this.msalService.instance.getAllAccounts();
-      this.msalService.instance.setActiveAccount(accounts[0]);
-    }
-  }
+  readonly title = signal('docs.kryostellar.com');
 }

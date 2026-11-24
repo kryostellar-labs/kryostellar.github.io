@@ -1,0 +1,225 @@
+$pane-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 280' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M76 1H383A16 16 0 0 1 399 17V204C399 214 395 222 386 228L348 266C342 275 334 279 324 279H17A16 16 0 0 1 1 263V76C1 66 5 58 14 52L52 14C58 5 66 1 76 1Z'/%3E%3C/svg%3E");
+$piece-tl-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='white' d='M12 2H40C46 2 48 6 44 12L12 44C6 48 2 46 2 40V12C2 5 5 2 12 2Z'/%3E%3C/svg%3E");
+$piece-br-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='white' d='M52 62H24C18 62 16 58 20 52L52 20C58 16 62 18 62 24V52C62 59 59 62 52 62Z'/%3E%3C/svg%3E");
+
+:host {
+  display: block;
+  min-height: 100%;
+}
+
+.landing {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  color: var(--sf-text);
+  overflow: hidden;
+}
+
+.landing__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--sf-bg);
+}
+
+.landing__ambient-sky {
+  position: absolute;
+  inset: 0;
+  background: var(--sf-hero-gradient);
+}
+
+.landing__ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(36px);
+}
+
+.landing__ambient-glow--a {
+  top: 8%;
+  left: 0;
+  width: 38rem;
+  height: 22rem;
+  background: radial-gradient(circle, rgba(56, 150, 185, 0.7), transparent 70%);
+}
+
+.landing__ambient-glow--b {
+  top: 26%;
+  right: -4%;
+  width: 30rem;
+  height: 30rem;
+  background: radial-gradient(circle, rgba(126, 182, 201, 0.45), transparent 68%);
+}
+
+.landing__ambient-glow--c {
+  bottom: -2%;
+  left: 28%;
+  width: 34rem;
+  height: 20rem;
+  background: radial-gradient(circle, rgba(47, 111, 130, 0.5), transparent 70%);
+}
+
+.landing__stage {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 28rem);
+  aspect-ratio: 400 / 280;
+}
+
+.landing__pane {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.landing__piece {
+  position: absolute;
+  z-index: 3;
+  // Sized to the TL cut (~56/400) so the hypotenuse can sit parallel with a gap
+  width: 14%;
+  aspect-ratio: 1;
+  transform-origin: center;
+  will-change: top, left, transform;
+  transition:
+    top 0.78s cubic-bezier(0.22, 1.2, 0.36, 1),
+    left 0.78s cubic-bezier(0.22, 1.2, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1.15, 0.36, 1);
+}
+
+.landing__piece--no-rotate-transition {
+  transition:
+    top 0.78s cubic-bezier(0.22, 1.2, 0.36, 1),
+    left 0.78s cubic-bezier(0.22, 1.2, 0.36, 1),
+    transform 0s;
+}
+
+.landing__piece--tl {
+  top: 0.35%;
+  left: 0.35%;
+}
+
+// Piece height ≈ 20% of stage (14% width × 400/280 aspect)
+.landing__piece--br {
+  top: calc(100% - 20.35%);
+  left: calc(100% - 14.35%);
+}
+
+// Both pieces share the same centered box so their hypotenuses face each other
+.landing__stage--converged {
+  .landing__piece--tl,
+  .landing__piece--br {
+    top: 40%;
+    left: 43%;
+  }
+}
+
+.landing__frost {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.05) 42%,
+      rgba(10, 18, 30, 0.22) 100%
+    ),
+    rgba(10, 16, 28, 0.22);
+  backdrop-filter: blur(28px) saturate(1.55);
+  -webkit-backdrop-filter: blur(28px) saturate(1.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.landing__frost--pane {
+  -webkit-mask-image: $pane-mask;
+  mask-image: $pane-mask;
+}
+
+.landing__frost--tl {
+  -webkit-mask-image: $piece-tl-mask;
+  mask-image: $piece-tl-mask;
+}
+
+.landing__frost--br {
+  -webkit-mask-image: $piece-br-mask;
+  mask-image: $piece-br-mask;
+}
+
+.landing__svg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.landing__fill {
+  fill: rgba(255, 255, 255, 0.04);
+}
+
+.landing__sheen {
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+
+.landing__stroke {
+  fill: none;
+  stroke: rgba(238, 243, 248, 0.52);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.landing__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 14%;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.55s var(--sf-ease);
+}
+
+.landing__content--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing__piece,
+  .landing__piece--no-rotate-transition,
+  .landing__content {
+    transition: none;
+  }
+}
+
+.landing__brand {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+}
+
+.landing__message {
+  margin: 0.85rem 0 0;
+  font-family: var(--sf-font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(210, 222, 232, 0.72);
+}

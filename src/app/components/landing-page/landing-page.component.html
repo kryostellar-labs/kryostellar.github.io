@@ -1,0 +1,195 @@
+<section class="landing" aria-label="Kryostellar documentation">
+  <div class="landing__ambient" aria-hidden="true">
+    <div class="landing__ambient-sky"></div>
+    <div class="landing__ambient-glow landing__ambient-glow--a"></div>
+    <div class="landing__ambient-glow landing__ambient-glow--b"></div>
+    <div class="landing__ambient-glow landing__ambient-glow--c"></div>
+  </div>
+
+  <div class="landing__stage" [class.landing__stage--converged]="converged()">
+    <!-- Separate TL triangle — diagonal parallel to pane cut, with a gap -->
+    <div
+      class="landing__piece landing__piece--tl"
+      [class.landing__piece--no-rotate-transition]="!rotateTransition()"
+      [style.transform]="'rotate(' + rotationDeg() + 'deg)'"
+    >
+      <div class="landing__frost landing__frost--tl" aria-hidden="true"></div>
+      <svg class="landing__svg" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="glassSheenTl" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32"/>
+            <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#7eb6c9" stop-opacity="0.07"/>
+          </linearGradient>
+        </defs>
+        <path
+          class="landing__fill"
+          d="M 12 2
+             H 40
+             C 46 2 48 6 44 12
+             L 12 44
+             C 6 48 2 46 2 40
+             V 12
+             C 2 5 5 2 12 2
+             Z"
+        />
+        <path
+          class="landing__sheen"
+          fill="url(#glassSheenTl)"
+          d="M 12 2
+             H 40
+             C 46 2 48 6 44 12
+             L 12 44
+             C 6 48 2 46 2 40
+             V 12
+             C 2 5 5 2 12 2
+             Z"
+        />
+        <path
+          class="landing__stroke"
+          d="M 12 2
+             H 40
+             C 46 2 48 6 44 12
+             L 12 44
+             C 6 48 2 46 2 40
+             V 12
+             C 2 5 5 2 12 2
+             Z"
+        />
+      </svg>
+    </div>
+
+    <!-- Separate BR triangle — mirrored cut + parallel gap -->
+    <div
+      class="landing__piece landing__piece--br"
+      [class.landing__piece--no-rotate-transition]="!rotateTransition()"
+      [style.transform]="'rotate(' + rotationDeg() + 'deg)'"
+    >
+      <div class="landing__frost landing__frost--br" aria-hidden="true"></div>
+      <svg class="landing__svg" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="glassSheenBr" x1="100%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28"/>
+            <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#7eb6c9" stop-opacity="0.07"/>
+          </linearGradient>
+        </defs>
+        <!-- Exact mirror of the TL triangle in the same 64×64 viewBox -->
+        <path
+          class="landing__fill"
+          d="M 52 62
+             H 24
+             C 18 62 16 58 20 52
+             L 52 20
+             C 58 16 62 18 62 24
+             V 52
+             C 62 59 59 62 52 62
+             Z"
+        />
+        <path
+          class="landing__sheen"
+          fill="url(#glassSheenBr)"
+          d="M 52 62
+             H 24
+             C 18 62 16 58 20 52
+             L 52 20
+             C 58 16 62 18 62 24
+             V 52
+             C 62 59 59 62 52 62
+             Z"
+        />
+        <path
+          class="landing__stroke"
+          d="M 52 62
+             H 24
+             C 18 62 16 58 20 52
+             L 52 20
+             C 58 16 62 18 62 24
+             V 52
+             C 62 59 59 62 52 62
+             Z"
+        />
+      </svg>
+    </div>
+
+    <div class="landing__pane">
+      <div class="landing__frost landing__frost--pane" aria-hidden="true"></div>
+      <svg
+        class="landing__svg"
+        viewBox="0 0 400 280"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="glassSheenPane" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32"/>
+            <stop offset="38%" stop-color="#ffffff" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#7eb6c9" stop-opacity="0.07"/>
+          </linearGradient>
+        </defs>
+        <!--
+          Rounded TR / BL; soft 45° cuts at TL / BR (cut ~76) with matching triangle gaps.
+        -->
+        <path
+          class="landing__fill"
+          d="M 76 1
+             H 383
+             A 16 16 0 0 1 399 17
+             V 204
+             C 399 214 395 222 386 228
+             L 348 266
+             C 342 275 334 279 324 279
+             H 17
+             A 16 16 0 0 1 1 263
+             V 76
+             C 1 66 5 58 14 52
+             L 52 14
+             C 58 5 66 1 76 1
+             Z"
+        />
+        <path
+          class="landing__sheen"
+          fill="url(#glassSheenPane)"
+          d="M 76 1
+             H 383
+             A 16 16 0 0 1 399 17
+             V 204
+             C 399 214 395 222 386 228
+             L 348 266
+             C 342 275 334 279 324 279
+             H 17
+             A 16 16 0 0 1 1 263
+             V 76
+             C 1 66 5 58 14 52
+             L 52 14
+             C 58 5 66 1 76 1
+             Z"
+        />
+        <path
+          class="landing__stroke"
+          d="M 76 1
+             H 383
+             A 16 16 0 0 1 399 17
+             V 204
+             C 399 214 395 222 386 228
+             L 348 266
+             C 342 275 334 279 324 279
+             H 17
+             A 16 16 0 0 1 1 263
+             V 76
+             C 1 66 5 58 14 52
+             L 52 14
+             C 58 5 66 1 76 1
+             Z"
+        />
+      </svg>
+
+      <div class="landing__content" [class.landing__content--hidden]="converged()">
+        <h1 class="landing__brand sf-wordmark">
+          <span class="sf-wordmark__main">Kryo</span><span class="sf-wordmark__accent">stellar</span>
+        </h1>
+        <p class="landing__message">Coming soon</p>
+      </div>
+    </div>
+  </div>
+</section>

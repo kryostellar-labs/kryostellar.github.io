@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --sf-font-display: "Sora", sans-serif;
+  --sf-font-body: "Manrope", sans-serif;
+  --sf-bg: #07090f;
+  --sf-text: #e8ecf4;
+  --sf-accent: #7eb6c9;
+  --sf-brand-main: #ffffff;
+  --sf-brand-accent: #7eb6c9;
+  --sf-hero-gradient: linear-gradient(165deg, #05070d 0%, #0a1020 38%, #101828 62%, #07090f 100%);
+  --sf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--sf-font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--sf-text);
+  background: var(--sf-bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--sf-font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sf-accent);
+  outline-offset: 3px;
+}
+
+/* Official Kryo/stellar wordmark — reuse on any brand-hero surface */
+.sf-wordmark {
+  font-family: var(--sf-font-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.sf-wordmark__main {
+  color: var(--sf-brand-main);
+}
+
+.sf-wordmark__accent {
+  color: var(--sf-brand-accent);
+}
